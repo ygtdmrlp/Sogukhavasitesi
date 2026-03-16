@@ -9,7 +9,7 @@ Bu proje, endüstriyel soğutma sistemleri üzerine hizmet veren bir firma için
 | :---: | :---: |
 | ![Ana Sayfa](EkranGörüntüsü2.png) | ![Admin Paneli](EkranGörüntüsü.png) |
 
-> *Not: Resimleri görmek için `public/uploads/` klasörüne ilgili isimde resimler ekleyebilir veya yukarıdaki parantez içindeki yolları kendi resim URL'lerinizle değiştirebilirsiniz.*
+
 
 ## 🚀 Özellikler
 

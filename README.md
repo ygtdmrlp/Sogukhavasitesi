@@ -10,7 +10,7 @@ Bu proje, endüstriyel soğutma sistemleri üzerine hizmet veren bir firma için
 
 > *Not: Resimleri görmek için `public/uploads/` klasörüne ilgili isimde resimler ekleyebilir veya yukarıdaki parantez içindeki yolları kendi resim URL'lerinizle değiştirebilirsiniz.*
 
-## � Özellikler
+## 🚀 Özellikler
 
 - **Modern & Responsive Tasarım**: Tailwind CSS ile geliştirilmiş, tüm cihazlara (mobil, tablet, desktop) tam uyumlu arayüz.
 - **Gelişmiş Yönetim Paneli**:

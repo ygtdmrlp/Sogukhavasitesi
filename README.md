@@ -79,4 +79,4 @@ Varsayılan giriş bilgileri:
 Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakınız.
 
 ---
-© 2026 SoğukTek Systems. Tüm hakları saklıdır.
+© 2026 Soguk Hava Websitesi Systems. Tüm hakları saklıdır.

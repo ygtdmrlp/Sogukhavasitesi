@@ -1,0 +1,182 @@
+{
+  "site": {
+    "title": "Mersin Soguk Hava",
+    "logo": "/uploads/logo_file-1773696191603-559094165.png",
+    "description": "Profesyonel soğuk hava depolama çözümleri, kurulum ve bakım hizmetleri.",
+    "phone": "+90 (212) 123 45 67",
+    "email": "info@soguktek.com",
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "twitter": "",
+      "linkedin": ""
+    },
+    "footer": {
+      "copyright": "",
+      "about_text": ""
+    },
+    "services_section": {
+      "title": "Akıllı Soğuk Depolar",
+      "subtitle": "Dijital izleme ve uzaktan kontrol özellikleriyle donatılmış soğuk hava depoları. Ürünlerinizin durumunu anlık takip edin, operasyonlarınızı verimli yönetin."
+    },
+    "hero": {
+      "tag": "Geleceğin Soğutma Teknolojileri",
+      "title": "Gıdalarınız İlk Günkü Tazeliğinde Kalsın",
+      "subtitle": "Yüksek verimli, enerji tasarruflu ve akıllı soğuk hava depolama sistemleri ile işletmenizi geleceğe taşıyoruz. Kurulumdan bakıma her adımda yanınızdayız.",
+      "image": "https://i.hizliresim.com/tiukiku.jpg"
+    },
+    "stats": [
+      {
+        "label": "Tamamlanan Proje",
+        "value": "500+"
+      },
+      {
+        "label": "Yıllık Tecrübe",
+        "value": "15+"
+      },
+      {
+        "label": "Uzman Personel",
+        "value": "120"
+      },
+      {
+        "label": "Teknik Destek",
+        "value": "24/7"
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Ahmet Kaya",
+        "role": "Kaya Lojistik CEO",
+        "initials": "AK",
+        "comment": "Yeni depomuzun kurulumunda gösterdikleri titizlik ve profesyonellik takdire şayan. Enerji tasarrufu konusunda verdikleri sözleri fazlasıyla tuttular."
+      },
+      {
+        "name": "Mehmet Soylu",
+        "role": "Soylu Gıda Ltd.",
+        "initials": "MS",
+        "comment": "Soğuk hava depomuzun periyodik bakım hizmetinden çok memnunuz. Sorunlarımızı anında çözüyorlar ve 7/24 ulaşılabiliyor olmaları büyük güven veriyor."
+      }
+    ],
+    "address": "Mersin"
+  },
+  "services_page": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Profesyonel soğuk hava depolama çözümleri ile işinizi büyütüyoruz."
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "subtitle": "Sektördeki 15 yıllık tecrübemizle soğutmanın zirvesindeyiz.",
+    "image": "/uploads/about_file-1773694045272-787843649.jpg",
+    "whoWeAre": {
+      "title": "Biz Kimiz?",
+      "content": "SoğukTek Soğutma Sistemleri, 2009 yılında endüstriyel soğutma sistemleri alanında yenilikçi çözümler sunmak amacıyla kurulmuştur. Kuruluşumuzdan bu yana, Türkiye genelinde yüzlerce başarılı projeye imza atarak sektörde güvenin ve kalitenin adresi olduk. Sadece kurulum değil, aynı zamanda mühendislik ve danışmanlık hizmetlerimizle müşterilerimizin işletme maliyetlerini düşürmeyi ve verimliliklerini artırmayı hedefliyoruz. Gelişen teknolojiyi yakından takip ederek, çevre dostu ve düşük enerji tüketen sistemler tasarlıyoruz."
+    },
+    "vision": {
+      "title": "Vizyonumuz",
+      "content": "Dünya standartlarında soğutma teknolojileri ile global bir marka olmak."
+    },
+    "mission": {
+      "title": "Misyonumuz",
+      "content": "Müşterilerimize en verimli, sürdürülebilir ve ekonomik soğutma çözümlerini sunmak."
+    }
+  },
+  "services": [
+    {
+      "id": 1,
+      "tag": "Uzmanlık Alanımız",
+      "title": "Soğuk Depo Kurulumu",
+      "description": "Her sektöre uygun, ihtiyaca göre ölçeklenebilir ve anahtar teslim soğuk hava deposu projeleri geliştiriyoruz.",
+      "icon": "fas fa-warehouse",
+      "image": "/uploads/service_file-1773695581379-185397551.jpg",
+      "features": [
+        "Yüksek Kaliteli Malzeme",
+        "Enerji Verimli Sistemler",
+        "7/24 Teknik Destek"
+      ]
+    },
+    {
+      "id": 2,
+      "tag": "Uzmanlık Alanımız",
+      "title": "Teknik Servis & Bakım",
+      "description": "Arızaları oluşmadan önlemek için periyodik bakım hizmeti veriyoruz. 7/24 mobil servis ekiplerimizle en kritik anlarda yanınızdayız.",
+      "icon": "fas fa-tools",
+      "image": "/uploads/service_file-1773695507146-786955042.jpg",
+      "features": [
+        "Yüksek Kaliteli Malzeme",
+        "Enerji Verimli Sistemler",
+        "7/24 Teknik Destek"
+      ]
+    },
+    {
+      "id": 3,
+      "tag": "Uzmanlık Alanımız",
+      "title": "Akıllı İzleme & Otomasyon",
+      "description": "Soğuk depolarınızı internet üzerinden, cep telefonunuzdan veya bilgisayarınızdan izleyebilirsiniz. Ani ısı değişimlerinde anında bildirim alırsınız.",
+      "icon": "fas fa-tools",
+      "image": "/uploads/service_file-1773695349380-727428651.jpg",
+      "features": [
+        "Yüksek Kaliteli Malzeme",
+        "Enerji Verimli Sistemler",
+        "7/24 Teknik Destek"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "category": "Gıda Sektörü",
+      "title": "Merkezi Soğutma Sistemi",
+      "description": "1500 m² alan üzerine kurulu, akıllı izleme sistemli lojistik depo projesi.",
+      "image": "/uploads/project_file-1773695952087-176223082.jpg"
+    },
+    {
+      "id": 2,
+      "category": "İlaç Sektörü",
+      "title": "Medikal Saklama Deposu",
+      "description": "+2 / +8 derece hassas sıcaklık kontrollü ilaç muhafaza ünitesi.",
+      "image": "/uploads/project_file-1773695712555-95108985.jpg"
+    },
+    {
+      "id": 3,
+      "category": "Tarımsal Üretim",
+      "title": "Meyve Sebze Şoklama",
+      "description": "-40 derece hızlı şoklama tünelleri ve muhafaza odaları.",
+      "image": "https://i.hizliresim.com/m4d34yb.jpg"
+    },
+    {
+      "id": 4,
+      "category": "Restoran & Kafe",
+      "title": "Mutfak Tipi Soğuk Odalar",
+      "description": "Modüler panelli, paslanmaz çelik zeminli endüstriyel mutfak çözümü.",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": 5,
+      "category": "Balıkçılık",
+      "title": "Deniz Ürünleri İşleme",
+      "description": "Tuzlu suya dayanıklı evaporatörler ile donatılmış işleme tesisi.",
+      "image": "https://i.hizliresim.com/4xlsw0c.jpg"
+    },
+    {
+      "id": 6,
+      "category": "Kimya Endüstrisi",
+      "title": "Ex-Proof Soğutma Üniteleri",
+      "description": "Yanıcı ve patlayıcı maddeler için özel güvenlikli soğutma sistemi.",
+      "image": "/uploads/project_file-1773695846855-791989259.jpg"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1773696725198,
+      "name": "yigit",
+      "email": "ygtdmrlp33@gmail.com",
+      "message": "dfsdfds",
+      "date": "17.03.2026 00:32:05",
+      "status": "new"
+    }
+  ],
+  "admin": {
+    "username": "admin",
+    "password": "admin"
+  }
+}

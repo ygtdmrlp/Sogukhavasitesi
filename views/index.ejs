@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+
+<!-- Hero Banner -->
+<section class="relative h-[80vh] flex items-center overflow-hidden bg-slate-900">
+    <div class="absolute inset-0 z-0">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40"></div>
+        <!-- Hero Image from JSON -->
+        <img src="<%= site.hero.image %>" 
+             alt="<%= site.hero.title %>" 
+             class="w-full h-full object-cover">
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-2xl text-white">
+            <span class="inline-block px-4 py-1 bg-cold-blue text-sm font-bold rounded-full mb-6 tracking-widest uppercase"><%= site.hero.tag %></span>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight"><%= site.hero.title %></h1>
+            <p class="text-xl text-slate-300 mb-10 leading-relaxed">
+                <%= site.hero.subtitle %>
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="/iletisim" class="btn-primary py-4 px-10 text-lg">Hemen Teklif Al</a>
+                <a href="/hizmetler" class="bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-10 rounded-lg backdrop-blur-sm transition-all border border-white/20">Hizmetlerimizi İncele</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-4 text-center mb-16">
+        <h2 class="text-4xl font-bold text-deep-blue mb-4"><%= site.services_section ? site.services_section.title : 'Neler Yapıyoruz?' %></h2>
+        <p class="text-cold-gray max-w-2xl mx-auto"><%= site.services_section ? site.services_section.subtitle : 'Uzman kadromuz ve modern ekipmanlarımızla soğuk zincirin her halkasında profesyonel hizmet sunuyoruz.' %></p>
+    </div>
+
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <% services.forEach(service => { %>
+            <!-- Service Card -->
+            <div class="card p-8 group">
+                <div class="w-16 h-16 bg-ice-blue rounded-2xl flex items-center justify-center mb-6 group-hover:bg-cold-blue transition-colors">
+                    <i class="<%= service.icon %> text-3xl text-cold-blue group-hover:text-white transition-colors"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-deep-blue"><%= service.title %></h3>
+                <p class="text-cold-gray mb-6"><%= service.description %></p>
+                <a href="/hizmetler" class="text-cold-blue font-bold flex items-center space-x-2 hover:translate-x-2 transition-transform">
+                    <span>Detaylı Bilgi</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-16 bg-deep-blue text-white">
+    <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <% site.stats.forEach(stat => { %>
+        <div>
+            <div class="text-4xl font-bold mb-2"><%= stat.value %></div>
+            <div class="text-slate-400"><%= stat.label %></div>
+        </div>
+        <% }) %>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-24 bg-ice-blue">
+    <div class="container mx-auto px-4 text-center mb-16">
+        <h2 class="text-4xl font-bold text-deep-blue mb-4">Müşterilerimiz Ne Diyor?</h2>
+    </div>
+
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <% site.testimonials.forEach(testimonial => { %>
+        <div class="bg-white p-8 rounded-2xl shadow-md">
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="w-12 h-12 bg-cold-blue rounded-full flex items-center justify-center text-white font-bold"><%= testimonial.initials %></div>
+                <div>
+                    <h4 class="font-bold"><%= testimonial.name %></h4>
+                    <p class="text-sm text-cold-gray"><%= testimonial.role %></p>
+                </div>
+            </div>
+            <p class="text-cold-gray italic">"<%= testimonial.comment %>"</p>
+        </div>
+        <% }) %>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<!-- Page Header -->
+<section class="bg-deep-blue text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Projelerimiz</h1>
+        <p class="text-xl text-slate-300">Başarıyla tamamladığımız soğuk hava deposu projelerinden bazıları.</p>
+    </div>
+</section>
+
+<!-- Projects Gallery -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% projects.forEach(project => { %>
+            <div class="card group">
+                <div class="relative overflow-hidden h-64">
+                    <img src="<%= project.image %>" 
+                         alt="<%= project.title %>" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-deep-blue/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white text-deep-blue px-6 py-2 rounded-full font-bold">İncele</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <span class="text-cold-blue text-sm font-bold uppercase"><%= project.category %></span>
+                    <h3 class="text-xl font-bold text-deep-blue mt-2"><%= project.title %></h3>
+                    <p class="text-cold-gray mt-2"><%= project.description %></p>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

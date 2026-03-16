@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<!-- Page Header -->
+<section class="bg-deep-blue text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4"><%= about.title %></h1>
+        <p class="text-xl text-slate-300"><%= about.subtitle %></p>
+    </div>
+</section>
+
+<!-- Company Info -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2 relative">
+                <img src="<%= about.image %>" 
+                     alt="Ofisimiz" 
+                     class="rounded-3xl shadow-2xl relative z-10">
+                <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-cold-blue/20 rounded-full z-0 blur-3xl"></div>
+                <div class="absolute -top-6 -left-6 w-48 h-48 bg-deep-blue/20 rounded-full z-0 blur-3xl"></div>
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold text-deep-blue mb-6"><%= about.whoWeAre.title %></h2>
+                <p class="text-cold-gray leading-relaxed mb-6">
+                    <%= about.whoWeAre.content %>
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-4 bg-ice-blue rounded-xl">
+                        <h4 class="font-bold text-deep-blue mb-1"><%= about.vision.title %></h4>
+                        <p class="text-sm text-cold-gray"><%= about.vision.content %></p>
+                    </div>
+                    <div class="p-4 bg-ice-blue rounded-xl">
+                        <h4 class="font-bold text-deep-blue mb-1"><%= about.mission.title %></h4>
+                        <p class="text-sm text-cold-gray"><%= about.mission.content %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

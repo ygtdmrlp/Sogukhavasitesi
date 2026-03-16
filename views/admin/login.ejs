@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap | SoğukTek Yönetim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cold-blue': '#0ea5e9',
+                        'ice-blue': '#f0f9ff',
+                        'deep-blue': '#0c4a6e',
+                        'cold-gray': '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-[#0f172a] flex items-center justify-center min-h-screen p-6 font-sans">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-cold-blue/10 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="w-full max-w-md relative z-10">
+        <div class="bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-10 border border-white/20">
+            <div class="text-center mb-12">
+                <div class="w-20 h-20 bg-cold-blue rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-xl shadow-cold-blue/20 rotate-3">
+                    <i class="fas fa-snowflake text-white text-4xl"></i>
+                </div>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight">Hoş Geldiniz</h1>
+                <p class="text-slate-500 mt-2 font-medium uppercase tracking-widest text-[10px]"><%= site.title %> Yönetim Paneli</p>
+            </div>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="mb-8 p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl flex items-center space-x-3 text-sm font-bold animate-pulse">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span><%= error %></span>
+                </div>
+            <% } %>
+
+            <form action="/admin/login" method="POST" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest px-1" for="username">Kullanıcı Adı</label>
+                    <div class="relative group">
+                        <span class="absolute inset-y-0 left-0 pl-5 flex items-center text-slate-400 group-focus-within:text-cold-blue transition-colors">
+                            <i class="fas fa-user text-sm"></i>
+                        </span>
+                        <input type="text" id="username" name="username" required placeholder="admin"
+                               class="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-cold-blue/10 focus:border-cold-blue transition-all bg-slate-50/50 font-medium">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest px-1" for="password">Şifre</label>
+                    <div class="relative group">
+                        <span class="absolute inset-y-0 left-0 pl-5 flex items-center text-slate-400 group-focus-within:text-cold-blue transition-colors">
+                            <i class="fas fa-lock text-sm"></i>
+                        </span>
+                        <input type="password" id="password" name="password" required placeholder="••••••••"
+                               class="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-cold-blue/10 focus:border-cold-blue transition-all bg-slate-50/50 font-medium">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-slate-900 hover:bg-cold-blue text-white font-black py-5 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-slate-900/10 flex items-center justify-center space-x-3 group">
+                    <span>Panel Girişi</span>
+                    <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+            
+            <div class="mt-12 pt-8 border-t border-slate-100 text-center">
+                <a href="/" class="text-sm font-bold text-slate-400 hover:text-cold-blue transition-colors flex items-center justify-center space-x-2">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                    <span>Siteye Geri Dön</span>
+                </a>
+            </div>
+        </div>
+        
+        <p class="text-center text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mt-8">
+            &copy; 2025 <%= site.title %> Systems
+        </p>
+    </div>
+</body>
+</html>

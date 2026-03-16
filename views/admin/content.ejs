@@ -1,0 +1,442 @@
+<%- include('layout-header') %>
+
+<div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">İçerik Yönetimi</h1>
+        <p class="text-slate-500 mt-1 font-medium">Sitenizin tüm sayfalarındaki içerikleri buradan yönetin.</p>
+    </div>
+    <div class="flex space-x-3">
+        <a href="#genel" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">Genel</a>
+        <a href="#hakkimizda" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">Hakkımızda</a>
+        <a href="#hizmetler" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-cold-blue hover:bg-slate-50 transition-all">Hizmetler</a>
+        <a href="#projeler" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">Projeler</a>
+    </div>
+</div>
+
+<div class="space-y-10 pb-20">
+    <!-- GENEL AYARLAR -->
+    <section id="genel" class="scroll-mt-24">
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="w-8 h-8 bg-cold-blue rounded-lg flex items-center justify-center text-white shadow-lg shadow-cold-blue/20">
+                <i class="fas fa-cog text-xs"></i>
+            </div>
+            <h2 class="text-xl font-black text-slate-800 uppercase tracking-wider">Genel Site Ayarları</h2>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+            <!-- Site Info -->
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="w-1.5 h-6 bg-cold-blue rounded-full mr-3"></span>
+                    Temel Bilgiler
+                </h3>
+                <form action="/admin/content/site" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Site İsmi</label>
+                            <input type="text" name="title" value="<%= site.title %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Site Logosu</label>
+                            <div class="flex items-center space-x-4">
+                                <% if (site.logo) { %>
+                                    <div class="w-12 h-12 bg-slate-50 rounded-xl border border-slate-100 p-2 flex items-center justify-center">
+                                        <img src="<%= site.logo %>" class="max-h-full max-w-full object-contain">
+                                    </div>
+                                <% } %>
+                                <input type="file" name="logo_file" class="flex-1 text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-cold-blue/10 file:text-cold-blue hover:file:bg-cold-blue/20 transition-all">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">SEO Açıklaması</label>
+                        <textarea name="description" rows="2" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium"><%= site.description %></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Telefon</label>
+                            <input type="text" name="phone" value="<%= site.phone %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">E-mail</label>
+                            <input type="email" name="email" value="<%= site.email %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Adres</label>
+                            <input type="text" name="address" value="<%= site.address %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-50 pt-6">
+                        <h4 class="text-sm font-bold text-slate-800 mb-4">Sosyal Medya ve Footer</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <input type="text" name="facebook" value="<%= site.social ? site.social.facebook : '' %>" placeholder="Facebook URL" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                            <input type="text" name="instagram" value="<%= site.social ? site.social.instagram : '' %>" placeholder="Instagram URL" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                            <input type="text" name="twitter" value="<%= site.social ? site.social.twitter : '' %>" placeholder="Twitter URL" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                            <input type="text" name="linkedin" value="<%= site.social ? site.social.linkedin : '' %>" placeholder="LinkedIn URL" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                        </div>
+                        <div class="space-y-4">
+                            <textarea name="about_text" rows="2" placeholder="Footer Hakkımızda Yazısı" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><%= site.footer ? site.footer.about_text : '' %></textarea>
+                            <input type="text" name="copyright" value="<%= site.footer ? site.footer.copyright : '' %>" placeholder="Copyright Metni" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-50 pt-6">
+                        <h4 class="text-sm font-bold text-slate-800 mb-4">Ana Sayfa Hizmetler Bölümü</h4>
+                        <div class="space-y-4">
+                            <input type="text" name="services_title" value="<%= site.services_section ? site.services_section.title : '' %>" placeholder="Bölüm Başlığı (Örn: Neler Yapıyoruz?)" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm">
+                            <textarea name="services_subtitle" rows="2" placeholder="Bölüm Alt Başlığı" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm"><%= site.services_section ? site.services_section.subtitle : '' %></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-slate-900/10">Tüm Bilgileri Güncelle</button>
+                </form>
+            </div>
+
+            <!-- Hero Banner -->
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="w-1.5 h-6 bg-amber-400 rounded-full mr-3"></span>
+                    Ana Sayfa (Hero)
+                </h3>
+                <form action="/admin/content/hero" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Üst Etiket</label>
+                            <input type="text" name="tag" value="<%= site.hero.tag %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Görsel</label>
+                            <input type="file" name="hero_file" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-amber-100 file:text-amber-600 hover:file:bg-amber-200 transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Ana Başlık</label>
+                        <input type="text" name="title" value="<%= site.hero.title %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Alt Başlık</label>
+                        <textarea name="subtitle" rows="3" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-cold-blue outline-none transition-all font-medium"><%= site.hero.subtitle %></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-amber-500/10">Hero'yu Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- HAKKIMIZDA SAYFASI -->
+    <section id="hakkimizda" class="scroll-mt-24">
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+                <i class="fas fa-file-alt text-xs"></i>
+            </div>
+            <h2 class="text-xl font-black text-slate-800 uppercase tracking-wider">Hakkımızda Sayfası</h2>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+            <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                <span class="w-1.5 h-6 bg-indigo-500 rounded-full mr-3"></span>
+                Hakkımızda İçerikleri
+            </h3>
+            <form action="/admin/content/about" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Sayfa Başlığı</label>
+                        <input type="text" name="title" value="<%= about.title %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Alt Başlık</label>
+                        <input type="text" name="subtitle" value="<%= about.subtitle %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all font-medium">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Sayfa Görseli</label>
+                    <input type="file" name="about_file" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 transition-all">
+                </div>
+                <div class="space-y-4">
+                    <input type="text" name="whoWeAreTitle" value="<%= about.whoWeAre.title %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all font-bold" placeholder="Biz Kimiz Başlığı">
+                    <textarea name="whoWeAreContent" rows="4" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all font-medium" placeholder="Biz Kimiz İçeriği"><%= about.whoWeAre.content %></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <input type="text" name="visionTitle" value="<%= about.vision.title %>" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none font-bold text-sm" placeholder="Vizyon Başlığı">
+                        <textarea name="visionContent" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none font-medium text-sm" placeholder="Vizyon İçeriği"><%= about.vision.content %></textarea>
+                    </div>
+                    <div class="space-y-3">
+                        <input type="text" name="missionTitle" value="<%= about.mission.title %>" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none font-bold text-sm" placeholder="Misyon Başlığı">
+                        <textarea name="missionContent" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none font-medium text-sm" placeholder="Misyon İçeriği"><%= about.mission.content %></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-indigo-600/10">Hakkımızda Sayfasını Güncelle</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- HİZMETLER YÖNETİMİ -->
+    <section id="hizmetler" class="scroll-mt-24">
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
+                <i class="fas fa-concierge-bell text-xs"></i>
+            </div>
+            <h2 class="text-xl font-black text-slate-800 uppercase tracking-wider">Hizmetler Sayfası ve Yönetimi</h2>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-10">
+            <!-- Services Page Header -->
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 xl:col-span-1">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
+                    Sayfa Üst Bilgisi
+                </h3>
+                <form action="/admin/content/services_page" method="POST" class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Sayfa Başlığı</label>
+                        <input type="text" name="title" value="<%= services_page.title %>" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Sayfa Alt Başlığı</label>
+                        <textarea name="subtitle" rows="3" class="w-full px-5 py-3.5 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all font-medium"><%= services_page.subtitle %></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-emerald-500/10">Sayfa Bilgisini Güncelle</button>
+                </form>
+            </div>
+
+            <!-- Individual Services List -->
+            <div class="xl:col-span-2">
+                <div class="flex items-center justify-between mb-6 px-2">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                        <span class="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
+                        Hizmet Listesi
+                    </h3>
+                    <button onclick="toggleModal('serviceModal')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition-all flex items-center shadow-lg shadow-emerald-500/10">
+                        <i class="fas fa-plus mr-2"></i> Yeni Hizmet Ekle
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <% services.forEach(service => { %>
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 relative group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
+                            <div class="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                                <button type="button" 
+                                        onclick="editService(this)" 
+                                        data-service='<%= JSON.stringify(service).replace(/'/g, "&#39;") %>'
+                                        class="w-9 h-9 bg-white shadow-md rounded-lg flex items-center justify-center text-cold-blue hover:bg-cold-blue hover:text-white transition-all">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <form action="/admin/services/delete/<%= service.id %>" method="POST" onsubmit="return confirm('Bu hizmeti silmek istediğinize emin misiniz?')">
+                                    <button type="submit" class="w-9 h-9 bg-white shadow-md rounded-lg flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all">
+                                        <i class="fas fa-trash text-sm"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-cold-blue/10 transition-colors duration-500">
+                                    <i class="<%= service.icon %> text-xl text-cold-blue"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-1 truncate"><%= service.title %></h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed line-clamp-2 font-medium"><%= service.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJE YÖNETİMİ -->
+    <section id="projeler" class="scroll-mt-24">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-purple-500/20">
+                    <i class="fas fa-project-diagram text-xs"></i>
+                </div>
+                <h2 class="text-xl font-black text-slate-800 uppercase tracking-wider">Proje Portfolyosu</h2>
+            </div>
+            <button onclick="toggleModal('projectModal')" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-2xl text-sm transition-all flex items-center shadow-lg shadow-purple-500/10">
+                <i class="fas fa-plus mr-2"></i> Yeni Proje Ekle
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% projects.forEach(project => { %>
+                <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 group hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="<%= project.image %>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                            <div class="flex space-x-3">
+                                <button type="button" 
+                                        onclick="editProject(this)" 
+                                        data-project='<%= JSON.stringify(project).replace(/'/g, "&#39;") %>'
+                                        class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center hover:bg-white hover:text-purple-600 transition-all">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <form action="/admin/projects/delete/<%= project.id %>" method="POST" onsubmit="return confirm('Bu projeyi silmek istediğinize emin misiniz?')">
+                                    <button type="submit" class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-6">
+                            <span class="px-4 py-2 bg-white/90 backdrop-blur-md text-purple-600 text-[10px] font-black uppercase tracking-widest rounded-xl shadow-sm"><%= project.category %></span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2"><%= project.title %></h3>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-2"><%= project.description %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+</div>
+
+<!-- SERVICE MODAL -->
+<div id="serviceModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl overflow-hidden">
+        <div class="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+            <h3 id="serviceModalTitle" class="text-2xl font-black text-slate-900 tracking-tight">Yeni Hizmet Ekle</h3>
+            <button onclick="toggleModal('serviceModal')" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <form id="serviceForm" action="/admin/services/add" method="POST" enctype="multipart/form-data" class="p-10 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Hizmet Adı</label>
+                    <input type="text" name="title" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Üst Etiket (Tag)</label>
+                    <input type="text" name="tag" placeholder="Uzmanlık Alanımız" class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">İkon (FontAwesome)</label>
+                    <input type="text" name="icon" placeholder="fas fa-tools" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Görsel Yükle</label>
+                    <div id="serviceImagePreview" class="mb-4 hidden">
+                        <img src="" class="h-20 rounded-xl border border-slate-100 object-contain">
+                    </div>
+                    <input type="file" name="service_file" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-600 hover:file:bg-emerald-100 transition-all">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Özellikler (Virgülle ayırın)</label>
+                <input type="text" name="features" placeholder="Özellik 1, Özellik 2, Özellik 3" class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium">
+            </div>
+            <div>
+                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Açıklama</label>
+                <textarea name="description" rows="3" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium"></textarea>
+            </div>
+            <div class="flex justify-end space-x-4 pt-6">
+                <button type="button" onclick="toggleModal('serviceModal')" class="px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all">Vazgeç</button>
+                <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-12 rounded-2xl transition-all shadow-lg shadow-emerald-500/20">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div id="projectModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl overflow-hidden">
+        <div class="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+            <h3 id="projectModalTitle" class="text-2xl font-black text-slate-900 tracking-tight">Yeni Proje Ekle</h3>
+            <button onclick="toggleModal('projectModal')" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <form id="projectForm" action="/admin/projects/add" method="POST" enctype="multipart/form-data" class="p-10 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Proje Adı</label>
+                    <input type="text" name="title" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-purple-500 transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Kategori</label>
+                    <input type="text" name="category" placeholder="Gıda Sektörü" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-purple-500 transition-all font-medium">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Görsel Seç</label>
+                <div id="projectImagePreview" class="mb-4 hidden">
+                    <img src="" class="h-20 rounded-xl border border-slate-100 object-contain">
+                </div>
+                <input type="file" name="project_file" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-50 file:text-purple-600 hover:file:bg-purple-100 transition-all">
+            </div>
+            <div>
+                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Kısa Açıklama</label>
+                <textarea name="description" rows="3" required class="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-purple-500 transition-all font-medium"></textarea>
+            </div>
+            <div class="flex justify-end space-x-4 pt-6">
+                <button type="button" onclick="toggleModal('projectModal')" class="px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all">Vazgeç</button>
+                <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-12 rounded-2xl transition-all shadow-lg shadow-purple-500/20">Projeyi Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleModal(id) {
+        const modal = document.getElementById(id);
+        modal.classList.toggle('hidden');
+        if (modal.classList.contains('hidden')) {
+            if (id === 'serviceModal') {
+                document.getElementById('serviceForm').reset();
+                document.getElementById('serviceForm').action = '/admin/services/add';
+                document.getElementById('serviceModalTitle').innerText = 'Yeni Hizmet Ekle';
+                document.getElementById('serviceImagePreview').classList.add('hidden');
+            } else if (id === 'projectModal') {
+                document.getElementById('projectForm').reset();
+                document.getElementById('projectForm').action = '/admin/projects/add';
+                document.getElementById('projectModalTitle').innerText = 'Yeni Proje Ekle';
+                document.getElementById('projectImagePreview').classList.add('hidden');
+            }
+        }
+    }
+
+    function editService(btn) {
+        const service = JSON.parse(btn.getAttribute('data-service'));
+        const form = document.getElementById('serviceForm');
+        form.action = '/admin/services/edit/' + service.id;
+        form.title.value = service.title;
+        form.tag.value = service.tag || '';
+        form.icon.value = service.icon;
+        form.features.value = service.features ? service.features.join(', ') : '';
+        form.description.value = service.description;
+        
+        if (service.image) {
+            const preview = document.getElementById('serviceImagePreview');
+            preview.querySelector('img').src = service.image;
+            preview.classList.remove('hidden');
+        } else {
+            document.getElementById('serviceImagePreview').classList.add('hidden');
+        }
+
+        document.getElementById('serviceModalTitle').innerText = 'Hizmeti Düzenle';
+        document.getElementById('serviceModal').classList.remove('hidden');
+    }
+
+    function editProject(btn) {
+        const project = JSON.parse(btn.getAttribute('data-project'));
+        const form = document.getElementById('projectForm');
+        form.action = '/admin/projects/edit/' + project.id;
+        form.title.value = project.title;
+        form.category.value = project.category;
+        form.description.value = project.description;
+
+        if (project.image) {
+            const preview = document.getElementById('projectImagePreview');
+            preview.querySelector('img').src = project.image;
+            preview.classList.remove('hidden');
+        } else {
+            document.getElementById('projectImagePreview').classList.add('hidden');
+        }
+
+        document.getElementById('projectModalTitle').innerText = 'Projeyi Düzenle';
+        document.getElementById('projectModal').classList.remove('hidden');
+    }
+</script>
+
+<%- include('layout-footer') %>

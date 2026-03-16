@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli | <%= site.title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cold-blue': '#0ea5e9',
+                        'ice-blue': '#f0f9ff',
+                        'deep-blue': '#0c4a6e',
+                        'cold-gray': '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @layer components {
+            .sidebar-link.active {
+                @apply bg-slate-800 text-cold-blue;
+            }
+            .sidebar-link.active i {
+                @apply text-cold-blue;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] font-sans text-slate-900">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-72 bg-slate-900 text-white flex-shrink-0 fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300 ease-in-out">
+            <div class="p-8">
+                <a href="/admin" class="flex items-center space-x-3">
+                    <% if (site.logo) { %>
+                        <img src="<%= site.logo %>" alt="Admin Logo" class="h-10 w-auto">
+                    <% } else { %>
+                        <div class="w-10 h-10 bg-cold-blue rounded-xl flex items-center justify-center shadow-lg shadow-cold-blue/20">
+                            <i class="fas fa-snowflake text-white text-xl"></i>
+                        </div>
+                    <% } %>
+                    <span class="text-xl font-bold tracking-tight"><%= site.title %></span>
+                </a>
+            </div>
+            
+            <nav class="mt-4 px-4 space-y-2">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4 mb-2">Ana Menü</p>
+                <a href="/admin" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl hover:bg-slate-800 transition-all group">
+                    <i class="fas fa-chart-pie w-5 text-slate-400 group-hover:text-cold-blue transition-colors"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+                <a href="/admin/content" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl hover:bg-slate-800 transition-all group">
+                    <i class="fas fa-layer-group w-5 text-slate-400 group-hover:text-cold-blue transition-colors"></i>
+                    <span class="font-medium">İçerik Yönetimi</span>
+                </a>
+                <a href="/admin/messages" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl hover:bg-slate-800 transition-all group">
+                    <i class="fas fa-comment-dots w-5 text-slate-400 group-hover:text-cold-blue transition-colors"></i>
+                    <span class="font-medium">Mesajlar</span>
+                </a>
+
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4 mt-8 mb-2">Sistem</p>
+                <a href="/admin/profile" class="sidebar-link flex items-center space-x-3 px-4 py-3.5 rounded-xl hover:bg-slate-800 transition-all group">
+                    <i class="fas fa-user-shield w-5 text-slate-400 group-hover:text-cold-blue transition-colors"></i>
+                    <span class="font-medium">Admin Profili</span>
+                </a>
+                <a href="/" target="_blank" class="flex items-center space-x-3 px-4 py-3.5 rounded-xl hover:bg-slate-800 transition-all group text-slate-400">
+                    <i class="fas fa-external-link-alt w-5"></i>
+                    <span class="font-medium">Siteyi Görüntüle</span>
+                </a>
+                
+                <div class="pt-8">
+                    <a href="/admin/logout" class="flex items-center space-x-3 px-4 py-3.5 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all group">
+                        <i class="fas fa-power-off w-5"></i>
+                        <span class="font-medium">Güvenli Çıkış</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <!-- Top Header -->
+            <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-40">
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleSidebar()" class="p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-2 text-sm text-slate-500 font-medium">
+                    <span>Hoş geldiniz,</span>
+                    <span class="text-slate-900 font-bold">Yönetici</span>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+                        <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-slate-500 text-sm"></i>
+                        </div>
+                        <span class="text-sm font-bold text-slate-700 md:block hidden">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Body -->
+            <main class="flex-1 overflow-y-auto p-8">

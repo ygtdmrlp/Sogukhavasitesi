@@ -1,0 +1,143 @@
+<%- include('layout-header') %>
+
+<div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Gelen Mesajlar</h1>
+        <p class="text-slate-500 mt-1 font-medium">İletişim formu üzerinden gönderilen tüm talepler.</p>
+    </div>
+    <div class="flex items-center space-x-3">
+        <div class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 shadow-sm">
+            Toplam: <%= messages.length %> Mesaj
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-slate-50/50 border-b border-slate-100">
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Tarih</th>
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Gönderen</th>
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">E-mail</th>
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Telefon</th>
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Mesaj Özeti</th>
+                    <th class="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest text-right">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50">
+                <% if (messages.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="px-8 py-20 text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-inbox text-3xl text-slate-200"></i>
+                                </div>
+                                <p class="text-slate-400 font-medium italic">Henüz mesaj bulunmuyor.</p>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+                <% messages.forEach(msg => { %>
+                    <tr class="group hover:bg-slate-50/50 transition-colors">
+                        <td class="px-8 py-5 text-sm text-slate-500 whitespace-nowrap font-medium"><%= msg.date %></td>
+                        <td class="px-8 py-5">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-cold-blue/10 text-cold-blue rounded-lg flex items-center justify-center font-bold text-xs">
+                                    <%= msg.name.charAt(0).toUpperCase() %>
+                                </div>
+                                <span class="text-sm font-bold text-slate-900"><%= msg.name %></span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-5 text-sm text-slate-600 font-medium"><%= msg.email %></td>
+                        <td class="px-8 py-5 text-sm text-slate-600 font-medium"><%= msg.phone || '-' %></td>
+                        <td class="px-8 py-5 text-sm text-slate-500 max-w-xs truncate font-medium" title="<%= msg.message %>"><%= msg.message %></td>
+                        <td class="px-8 py-5 text-right">
+                            <div class="flex justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                 <button onclick="showFullMessage('<%= msg.name %>', '<%= msg.email %>', '<%= msg.phone || '-' %>', '<%= msg.date %>', '<%= msg.message.replace(/\n/g, '<br>') %>')" 
+                                         class="p-2.5 text-cold-blue hover:bg-cold-blue hover:text-white rounded-xl transition-all shadow-sm" title="Detay">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <form action="/admin/messages/delete/<%= msg.id %>" method="POST" onsubmit="return confirm('Bu mesajı silmek istediğinize emin misiniz?')">
+                                    <button type="submit" class="p-2.5 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all shadow-sm" title="Sil">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Message Detail Modal -->
+<div id="messageModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden transform transition-all scale-95 opacity-0 duration-300" id="modalContainer">
+        <div class="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+            <div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight">Mesaj Detayı</h3>
+                <p class="text-sm text-slate-400 mt-1 font-medium" id="modalDateInfo"></p>
+            </div>
+            <button onclick="closeModal()" class="w-12 h-12 bg-white border border-slate-100 text-slate-400 hover:text-red-500 hover:border-red-100 rounded-2xl transition-all flex items-center justify-center shadow-sm">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="p-10 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Gönderen</p>
+                    <p id="modalName" class="text-base font-bold text-slate-900"></p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">E-mail Adresi</p>
+                    <p id="modalEmail" class="text-base font-bold text-cold-blue break-all"></p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Telefon</p>
+                    <p id="modalPhone" class="text-base font-bold text-slate-900"></p>
+                </div>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 px-2">Mesaj İçeriği</p>
+                <div id="modalText" class="text-slate-700 bg-white p-8 rounded-[2rem] border border-slate-100 min-h-[180px] leading-relaxed text-lg font-medium shadow-sm"></div>
+            </div>
+        </div>
+        <div class="px-10 py-8 bg-slate-50/50 border-t border-slate-50 flex justify-end">
+            <button onclick="closeModal()" class="bg-slate-900 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-1">Kapat</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('messageModal');
+    const modalContainer = document.getElementById('modalContainer');
+    
+    function showFullMessage(name, email, phone, date, message) {
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalEmail').innerText = email;
+        document.getElementById('modalPhone').innerText = phone;
+        document.getElementById('modalDateInfo').innerText = date + ' tarihinde gönderildi';
+        document.getElementById('modalText').innerHTML = message;
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modalContainer.classList.remove('scale-95', 'opacity-0');
+        }, 10);
+    }
+    
+    function closeModal() {
+        modalContainer.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+
+    // Close on overlay click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+</script>
+
+<%- include('layout-footer') %>
